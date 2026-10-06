@@ -1,25 +1,41 @@
 <header class="site-header">
-  <a class="brand" href="#home" aria-label="Shivalinga Kala Kendra home">
-    <img class="brand-mark" src="/shivalinga-logo.png" alt="Shivalinga Kala Kendra logo" />
-    <span class="brand-name">Shivalinga <span>Kala Kendra</span></span>
-  </a>
+  <div class="header-top">
+    <a class="brand" href="#home" aria-label="Shivalinga Kala Kendra home">
+      <img class="brand-mark" src="/shivalinga-logo.png" alt="Shivalinga Kala Kendra logo" />
+      <span class="brand-name">Shivalinga <span>Kala Kendra</span></span>
+    </a>
 
-  <nav class="main-nav" aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a href="#about">Our story</a>
-    <a href="#courses">Courses</a>
-    <a href="#moments">Moments</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <a class="login-button" href="/login">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+      </svg>
+      <span>Login</span>
+    </a>
+  </div>
 
-  <a class="login-button" href="/login">
-    Login <span aria-hidden="true">↗</span>
-  </a>
+  <div class="header-nav">
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#about">Our story</a>
+      <a href="#courses">Courses</a>
+      <a href="#moments">Moments</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main>
   <section class="hero" id="home">
-    <div class="hero-image" role="img" aria-label="A dancer performing on a warmly lit stage"></div>
+    @for (image of heroImages; track image.src; let i = $index) {
+      <img
+        class="hero-image"
+        [class.is-active]="i === activeHeroImage()"
+        [src]="image.src"
+        [style.object-position]="image.position"
+        alt=""
+        aria-hidden="true"
+      />
+    }
     <div class="hero-shade"></div>
     <div class="hero-content">
       <p class="eyebrow"><span></span> A home for the art of movement</p>
