@@ -1,0 +1,116 @@
+<main class="login-page">
+  <section class="login-visual" aria-label="Dance and cultural tradition">
+    <div class="login-visual-shade"></div>
+    <div class="visual-caption">
+      <p class="eyebrow"><span class="gold-dot"></span> A place to learn, grow &amp; belong</p>
+      <h1>Carry the art<br />forward with <em>grace.</em></h1>
+      <p>For every student, teacher, and member of our dance community.</p>
+      <span class="visual-signoff">SHIVALINGA KALA KENDRA&nbsp; / &nbsp;EST. IN PASSION</span>
+    </div>
+  </section>
+
+  <section class="login-panel">
+    <div class="login-card">
+      <p class="eyebrow"><span class="gold-dot"></span> Welcome back</p>
+      <h2>Sign in to<br /><em>your space.</em></h2>
+      <p class="login-intro">Continue your journey with Shivalinga Kala Kendra.</p>
+
+      <form class="login-form" (ngSubmit)="submitLogin()" #loginForm="ngForm">
+        <label for="login-email">Email</label>
+        <input
+          id="login-email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="you@example.com"
+          autocomplete="username"
+          required
+        />
+
+        <div class="password-label-row">
+          <label for="login-password">Password</label>
+          <button class="forgot-link" type="button" (click)="openResetDialog()">
+            Forgot password?
+          </button>
+        </div>
+        <input
+          id="login-password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        />
+
+        <button class="login-submit" type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Signing in…' : 'Login' }} <span aria-hidden="true">↗</span>
+        </button>
+        @if (loginMessage) {
+          <p class="form-message" [class.form-message-error]="loginError" [attr.role]="loginError ? 'alert' : 'status'">
+            {{ loginMessage }}
+          </p>
+        }
+      </form>
+
+      <div class="access-note">
+        <span class="note-rule"></span>
+        <p>Access is available to enrolled students, instructors, and academy staff.</p>
+      </div>
+
+      <p class="contact-prompt">
+        Not a student yet?
+        <a routerLink="/" fragment="contact">Contact us to begin your journey <span aria-hidden="true">↗</span></a>
+      </p>
+    </div>
+  </section>
+</main>
+
+@if (resetDialogOpen) {
+  <div
+    class="reset-backdrop"
+    role="presentation"
+    (click)="closeResetDialog()"
+    (keydown.escape)="closeResetDialog()"
+  >
+    <section
+      class="reset-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="reset-title"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="reset-close"
+        type="button"
+        aria-label="Close password reset"
+        (click)="closeResetDialog()"
+      >
+        ×
+      </button>
+      <p class="eyebrow"><span class="gold-dot"></span> Account assistance</p>
+      <h2 id="reset-title">Reset your<br /><em>password.</em></h2>
+      <p class="reset-copy">
+        Enter the email address associated with your academy account. We’ll use it to send a reset
+        link once this service is connected.
+      </p>
+      <form class="reset-form" (ngSubmit)="submitPasswordReset()" #resetForm="ngForm">
+        <label for="reset-email">Email address</label>
+        <input
+          id="reset-email"
+          name="resetEmail"
+          type="email"
+          [(ngModel)]="resetEmail"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+          autofocus
+        />
+        <button class="login-submit" type="submit">Continue <span aria-hidden="true">↗</span></button>
+        @if (resetMessage) {
+          <p class="form-message" role="status">{{ resetMessage }}</p>
+        }
+      </form>
+    </section>
+  </div>
+}
